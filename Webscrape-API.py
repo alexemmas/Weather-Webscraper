@@ -36,7 +36,7 @@ def weather_detail(c):
 #route page to display search form
 @app.route('/', methods=['GET'])
 def home():
-    return "<form action='http://localhost:5000/search/' method='get'><div><input type='text' name='s' maxLength='75' placeholder='Enter a town, city or UK postcode' autoComplete='off' spellcheck='false'/></div><input type='submit' value='Search' title='Search for a location'/></form>"
+    return "<form action='./search/' method='get'><div><input type='text' name='s' maxLength='75' placeholder='Enter a town, city or UK postcode' autoComplete='off' spellcheck='false'/></div><input type='submit' value='Search' title='Search for a location'/></form>"
 
 #function used to search and scrape the bbc weather page
 @app.route('/search/', methods=['GET', 'POST'])
@@ -72,7 +72,7 @@ def search():
             for link in links:
                 link_url = link["href"]
                 link_name = link.text
-                data = data + "<tr><td><a href='http://localhost:5000/searchdet/?s=" + str(link_url) + "'>" + str(link_name) + "</a></td></tr>"
+                data = data + "<tr><td><a href='../searchdet/?s=" + str(link_url) + "'>" + str(link_name) + "</a></td></tr>"
         data = data + "</table>"
     return data
 
@@ -86,4 +86,4 @@ def search_detail():
     return data
 
 
-app.run()
+app.run(host='0.0.0.0')
